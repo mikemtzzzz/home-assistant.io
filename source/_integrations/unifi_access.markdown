@@ -47,11 +47,15 @@ Before setting up this integration, make sure you have the following:
 
 - A running UniFi Access controller (for example, on a UniFi Dream Machine Pro or Cloud Key Gen2 Plus with the Access application installed).
 - An API token generated from the UniFi Access controller settings:
-  1. Open the UniFi Access web interface.
-  2. Navigate to **Settings** > **Advanced**.
-  3. Under **API Token**, select **Create Token**.
+  1. Open the UniFi Access web interface at 'https://<access_controller-IP>'.
+  2. Navigate to **Settings** > **General**.
+  3. Under **API Token**, select **Create New**.
   4. Give the token a descriptive name (for example, _Home Assistant_) and save it.
   5. Copy the generated token — you will need it during setup.
+
+  {% note %}
+  The UniFi Access API token must be created from within the UniFi Access application under **Settings** > **General** > **API Token**. Tokens created from the UniFi **Integrations** page, UniFi Protect, UniFi Network, or UniFi OS are not UniFi Access API tokens and will not work with this integration.
+  {% endnote %}
 - Your Home Assistant instance must be able to reach the UniFi Access controller on your local network.
 
 {% include integrations/config_flow.md %}
@@ -242,15 +246,17 @@ The integration reports invalid authentication when trying to connect.
 
 ##### Description
 
-The API token may have been revoked, expired, or entered incorrectly.
+The API token may have been revoked, expired, entered incorrectly, or generated from the wrong UniFi application. This integration requires a UniFi Access API token, not a UniFi Protect, UniFi Network, or UniFi OS token.
 
 ##### Resolution
 
 To resolve this issue, try the following steps:
 
-1. Verify that the API token has not been revoked or expired in the UniFi Access controller settings.
-2. Re-enter the token or generate a new one.
-3. If the integration was already set up, use the **Reconfigure** option in the integration settings.
+1. Verify that the token was created in the UniFi Access application under **Settings** > **General** > **API Token**.
+2. Do not use a token created from the UniFi **Integrations** page, UniFi Protect, UniFi Network, or UniFi OS.
+3. Verify that the API token has not been revoked or expired in the UniFi Access controller settings.
+4. Re-enter the token or generate a new one.
+5. If the integration was already set up, use the **Reconfigure** option in the integration settings.
 
 ## Removing the integration
 
